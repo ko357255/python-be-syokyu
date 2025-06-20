@@ -19,9 +19,9 @@ def get_todo_list(db: Session, todo_list_id: int):
     """指定したIDのTodoリストを取得する"""
     return db.query(ListModel).filter(ListModel.id == todo_list_id).first()
 
-def get_todo_lists(db: Session):
-    """全てのTodoリストを取得する"""
-    return db.query(ListModel).all()
+def get_todo_lists(db: Session, offset: int, limit: int):
+    """offsetとlimitを元に全てのTodoリストを取得する"""
+    return db.query(ListModel).offset(offset).limit(limit).all()
 
 
 def update_todo_list(db: Session, todo_list_id: int, update_todo_list: UpdateTodoList):

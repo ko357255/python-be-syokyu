@@ -26,9 +26,9 @@ def get_todo_item(db: Session, todo_list_id: int, todo_item_id: int):
     """指定したTodoリスト内のTodo項目を取得する"""
     return db.query(ItemModel).filter_by(id=todo_item_id, todo_list_id=todo_list_id).first()
 
-def get_todo_items(db: Session, todo_list_id: int):
-    """指定したTodoリスト内の全てのTodo項目を取得する"""
-    return db.query(ItemModel).filter_by(todo_list_id=todo_list_id).all()
+def get_todo_items(db: Session, todo_list_id: int, offset: int, limit: int):
+    """offsetとlimitを元に指定したTodoリスト内の全てのTodo項目を取得する"""
+    return db.query(ItemModel).filter_by(todo_list_id=todo_list_id).offset(offset).limit(limit).all()
 
 def update_todo_item(
     db: Session,
